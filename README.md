@@ -11,8 +11,7 @@ future plan:
 3. template shortcut, since now i should type the full filename of a template
 4. make this a package, so that i can pip install it rather than git pull it.
 5. more freedom on template file, now i should put the template in basedir/recipe/ directory, 
-
-it will has a argument directly pointing to a template file anywhere.
+   it will has a argument directly pointing to a template file anywhere.
 
 wanting:
 Anyone who has some useful recipe(template) can commit PR, and anyone has some function suggestion can commit PR or issues.
