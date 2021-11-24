@@ -1,0 +1,10 @@
+# this recipe is for data analysis
+
+project_name:
+  - data
+  - scripts
+  - results:
+    - figs
+  - docs
+
+
