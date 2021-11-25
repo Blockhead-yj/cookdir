@@ -1,18 +1,24 @@
 # cookdir
-initializing directories and files by recipe(template)
+## Initializing directories and files by recipe(template)
 
-current function:
-1. self-defined recipe(template) using yaml
-2. create initial files
+## Installation
 
-future plan:
-1. a command showing all template, like cookdir list
-2. a command print the content of specific template, like cookdir show template
-3. template shortcut, since now i should type the full filename of a template
-4. make this a package, so that i can pip install it rather than git pull it.
-5. more freedom on template file, now i should put the template in basedir/recipe/ directory, 
-   it will has a argument directly pointing to a template file anywhere.
+`pip install cookdir`
 
-wanting:
+## Functions:
+
+- [x] create directories and files by a template name or a self-defined template yaml file.
+   - Usage:
+      - `cookdir cook pypkg pkgname --destination=your_path`
+      - `cookdir cook template_file_path name`
+- [x] list all existing template, or show the content of a particular template
+   - Usage:
+      - `cookdir list`
+      - `cookdir list pypkg`
+- [ ] template shortcut
+- [ ] support file content template so files will be initilized with some content rather than empty
+
+## Wanting:
 Anyone who has some useful recipe(template) can commit PR, and anyone has some function suggestion can commit PR or issues.
+
 I appreciate all of you.
