@@ -1,0 +1,6 @@
+# this template is used for python package
+
+- DEFAULT:
+  - __init__.py
+- tests
+- setup.py
