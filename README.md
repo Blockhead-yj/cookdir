@@ -15,7 +15,7 @@
    - Usage:
       - `cookdir list`
       - `cookdir list pypkg`
-- [ ] template shortcut
+- [x] template shortcut
 - [x] support file content template so files will be initilized with some content rather than empty
 
 ## Template:

@@ -1,7 +1,9 @@
 import os
 import re
 from functools import singledispatch
-from utils import *
+
+import glob
+
 import fire
 import yaml
 
@@ -73,14 +75,17 @@ def show(recipe=None):
     """
     if recipe is None:
         print("recipes: ")
-        for i in os.listdir(f"{base_dir}/recipe/"):
-            if not re.search("(.*).yml", i) is None:
-                recipe_name = re.search("(.*).yml", i)[1]
-                print(recipe_name)
+        for i, f in enumerate(list_recipes()):
+            recipe_name = re.search("(.*).yml", f)[1]
+            print(f'{i}. {recipe_name}')
     else:
         with open(f"{base_dir}/recipe/{recipe}.yml", "r") as f:
             for line in f:
                 print(line, end="")
+
+def list_recipes():
+    recipes = glob.glob(os.path.join(base_dir,"recipe","*.yml"))
+    return recipes
 
 # cooking
 def cook(recipe, name="DEFAULT", destination="."):
@@ -100,7 +105,15 @@ def cook(recipe, name="DEFAULT", destination="."):
     -------
 
     """
-    recipe_file = get_path(recipe, base_dir)
+    if os.path.isfile(recipe):
+        recipe_file = recipe
+    elif isinstance(recipe, int) & recipe in range(1, len(list_recipes())):
+        recipe_file = f"{list_recipes()[recipe]}"
+    elif os.path.isfile(f"{base_dir}/recipe/{recipe}.yml"):
+        recipe_file = f"{base_dir}/recipe/{recipe}.yml"
+    else:
+        print("Input recipe is not a valid template name or filename, please check it!")
+        return None
     # replace all "DEFAULT" in template with true project name and parse it
     if recipe_file is None:
         return None
