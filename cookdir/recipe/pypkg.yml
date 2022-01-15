@@ -1,6 +1,7 @@
 # this template is used for python package
 
-- DEFAULT:
-  - __init__.py
-- tests
-- setup.py
+DEFAULT:
+  - DEFAULT:
+    - __init__.py
+  - tests
+  - setup.py: pypkg_setup.tpl
