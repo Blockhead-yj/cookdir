@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="cookdir",
-    version="0.0.2",
+    version="0.1.0",
     author="yjdai",
     author_email="136271877@qq.com",
     description="create directories by template",

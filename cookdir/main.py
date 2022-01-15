@@ -1,7 +1,7 @@
 import os
 import re
 from functools import singledispatch
-
+from utils import *
 import fire
 import yaml
 
@@ -26,6 +26,19 @@ def _cookdict(recipe, root="."):
 
 @cookdirs.register(str)
 def _cookstr(recipe, root="."):
+    if recipe.find(".") >= 0 and os.path.isfile(root):
+        if os.path.isfile(recipe):
+            recipe_file = recipe
+        elif os.path.isfile(f"{base_dir}/recipe/{recipe}"):
+            recipe_file = f"{base_dir}/recipe/{recipe}"
+        else:
+            print("Input recipe is not a valid template name or filepath, please check it!")
+            return None
+        with open(root, "w") as f:
+            with open(recipe_file, 'r') as tpl:
+                for line in tpl:
+                    f.write(line)
+        return root
     path = os.path.join(root, recipe)
     if recipe.find(".") >= 0:
         if not os.path.isfile(path):
@@ -87,14 +100,10 @@ def cook(recipe, name="DEFAULT", destination="."):
     -------
 
     """
-    if os.path.isfile(recipe):
-        recipe_file = recipe
-    elif os.path.isfile(f"{base_dir}/recipe/{recipe}.yml"):
-        recipe_file = f"{base_dir}/recipe/{recipe}.yml"
-    else:
-        print("Input recipe is not a valid template name or filename, please check it!")
-        return None
+    recipe_file = get_path(recipe, base_dir)
     # replace all "DEFAULT" in template with true project name and parse it
+    if recipe_file is None:
+        return None
     with open(recipe_file, "r") as f:
         recipe = f.read()
         try:
