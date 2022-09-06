@@ -107,7 +107,7 @@ def cook(recipe, name="DEFAULT", destination="."):
     """
     if os.path.isfile(recipe):
         recipe_file = recipe
-    elif isinstance(recipe, int) & recipe in range(1, len(list_recipes())):
+    elif isinstance(recipe, int) and recipe in range(1, len(list_recipes())):
         recipe_file = f"{list_recipes()[recipe]}"
     elif os.path.isfile(f"{base_dir}/recipe/{recipe}.yml"):
         recipe_file = f"{base_dir}/recipe/{recipe}.yml"
