@@ -7,7 +7,7 @@ print(setuptools.find_packages())
 
 setuptools.setup(
     name="cookdir",
-    version="0.1.2",
+    version="0.1.3",
     author="yjdai",
     author_email="136271877@qq.com",
     description="create directories by template",
@@ -24,7 +24,7 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.9', # actually i don't know it, but i write this in 3.9
+    python_requires='>=3.6', # actually i don't know it, but i write this in 3.6
     install_requires=["fire==0.4.0", "PyYAML==6.0"],
     entry_points={
         'console_scripts':['cookdir=cookdir.main:cli']
