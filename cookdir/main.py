@@ -34,7 +34,7 @@ def _cookstr(recipe, root="."):
         elif os.path.isfile(f"{base_dir}/recipe/{recipe}"):
             recipe_file = f"{base_dir}/recipe/{recipe}"
         else:
-            print("Input recipe is not a valid template name or filepath, please check it!")
+            print(f"Input recipe {base_dir}/recipe/{recipe} is not a valid template name or filepath, please check it!")
             return None
         with open(root, "w") as f:
             with open(recipe_file, 'r') as tpl:

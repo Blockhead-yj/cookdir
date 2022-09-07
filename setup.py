@@ -7,7 +7,7 @@ print(setuptools.find_packages())
 
 setuptools.setup(
     name="cookdir",
-    version="0.1.3",
+    version="0.1.4",
     author="yjdai",
     author_email="136271877@qq.com",
     description="create directories by template",
@@ -16,7 +16,7 @@ setuptools.setup(
     url="https://github.com/Blockhead-yj/cookdir",
     include_package_data=True,
     package_data={
-        'cookdir':['recipe/*.yml']
+        'cookdir':['recipe/*.yml', 'recipe/*.tpl']
     },
     packages=setuptools.find_packages(),
     classifiers=[
