@@ -1,7 +1,7 @@
 import os
 import re
 from functools import singledispatch
-
+from pathlib import Path
 import glob
 
 import fire
@@ -36,8 +36,8 @@ def _cookstr(recipe, root="."):
         else:
             print(f"Input recipe {base_dir}/recipe/{recipe} is not a valid template name or filepath, please check it!")
             return None
-        with open(root, "w") as f:
-            with open(recipe_file, 'r') as tpl:
+        with open(root, "w", encoding='utf-8') as f:
+            with open(recipe_file, 'r', encoding='utf-8') as tpl:
                 for line in tpl:
                     f.write(line)
         return root
@@ -45,7 +45,7 @@ def _cookstr(recipe, root="."):
     if recipe.find(".") >= 0:
         if not os.path.isfile(path):
             print(f"Creating file {path}...")
-            open(path, "w").close()
+            open(path, "w", encoding='utf-8').close()
         else:
             print(f"File {path} exists, skip it!")
     else:
@@ -77,11 +77,18 @@ def show(recipe=None):
         print("recipes: ")
         for i, f in enumerate(list_recipes()):
             recipe_name = re.search("(.*).yml", f)[1]
-            print(f'{i}. {recipe_name}')
+            print(f'{i}. {Path(recipe_name).stem}')
+        return None
+    elif os.path.isfile(f"{base_dir}/recipe/{recipe}.yml"):
+        recipe_file = f"{base_dir}/recipe/{recipe}.yml"
+    elif isinstance(recipe, int) and recipe in range(len(list_recipes())):
+        recipe_file = f"{list_recipes()[recipe]}"
     else:
-        with open(f"{base_dir}/recipe/{recipe}.yml", "r") as f:
-            for line in f:
-                print(line, end="")
+        print("Input recipe is not a valid template name or filename, please check it!")
+        return None
+    with open(recipe_file, "r", encoding='utf-8') as f:
+        for line in f:
+            print(line, end="")
 
 def list_recipes():
     recipes = glob.glob(os.path.join(base_dir,"recipe","*.yml"))
@@ -107,7 +114,7 @@ def cook(recipe, name="DEFAULT", destination="."):
     """
     if os.path.isfile(recipe):
         recipe_file = recipe
-    elif isinstance(recipe, int) and recipe in range(1, len(list_recipes())):
+    elif isinstance(recipe, int) and recipe in range(len(list_recipes())):
         recipe_file = f"{list_recipes()[recipe]}"
     elif os.path.isfile(f"{base_dir}/recipe/{recipe}.yml"):
         recipe_file = f"{base_dir}/recipe/{recipe}.yml"
@@ -117,7 +124,7 @@ def cook(recipe, name="DEFAULT", destination="."):
     # replace all "DEFAULT" in template with true project name and parse it
     if recipe_file is None:
         return None
-    with open(recipe_file, "r") as f:
+    with open(recipe_file, "r", encoding='utf-8') as f:
         recipe = f.read()
         try:
             recipe = yaml.load(recipe.replace("DEFAULT", name), Loader=yaml.FullLoader)

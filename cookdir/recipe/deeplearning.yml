@@ -1,0 +1,9 @@
+# this recipe is for deeplearning
+
+DEFAULT:
+  - data
+  - models
+  - config.py: deeplearning_config.tpl
+  - trainer.py: deeplearning_trainer.tpl
+  - utils:
+    - from_lambda.py: deeplearning_from_lambda.tpl
