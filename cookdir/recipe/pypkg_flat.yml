@@ -1,0 +1,14 @@
+# this template is used for flat layout python package
+
+DEFAULT:
+  - __init__.py
+  - main.py
+  - utils.py
+  - config.py
+  - tests
+  - setup.py: pypkg_setup_flat.tpl
+  - pyproject.toml: pyproject.toml.tpl
+  - .gitignore: python.gitignore.tpl
+  - LEGAL.md: LEGAL.md.tpl
+  - README.md: README.md.tpl
+  - requirements.txt: requirements.txt.tpl

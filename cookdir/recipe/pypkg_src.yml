@@ -1,0 +1,16 @@
+# this template is used for src layout python package
+
+DEFAULT:
+  - src
+  - src/DEFAULT
+  - src/DEFAULT/__init__.py
+  - src/DEFAULT/main.py
+  - src/DEFAULT/utils.py
+  - src/DEFAULT/config.py
+  - tests
+  - setup.py: pypkg_setup_src.tpl
+  - pyproject.toml: pyproject.toml.tpl
+  - .gitignore: python.gitignore.tpl
+  - LEGAL.md: LEGAL.md.tpl
+  - README.md: README.md.tpl
+  - requirements.txt: requirements.txt.tpl
